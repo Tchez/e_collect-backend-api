@@ -1,0 +1,117 @@
+{% load static %}
+{% load base %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Login</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content=""/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="icon"
+          type="image/x-icon"
+          href="{% static 'core/images/favicon.ico' %}"/>
+    <!-- Core stylesheets -->
+    <link rel="stylesheet"
+          href="{% static 'core/vendor/css/bootstrap5.min.css' %}"/>
+    <!-- Design System do Governo Federal -->
+    <!-- Fonte Rawline-->
+    <link rel="stylesheet"
+          href="https://cdn.dsgovserprodesign.estaleiro.serpro.gov.br/design-system/fonts/rawline/css/rawline.css"/>
+    <!-- Fonte Raleway-->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900&amp;display=swap"/>
+    <!-- Design System de Governo-->
+    <link rel="stylesheet" href="{% static 'core/css/dsgov.min.css' %}" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/custom.css' %}" />
+    <link rel="stylesheet" href="{% static 'core/css/login.css' %}" />
+  </head>
+  <body>
+    <div class="background"
+         style="background-image: url({% if background %}{{ background.imagem.url }}{% else %}{% static 'core/images/bg_login.jpg' %}{% endif %})">
+    </div>
+    <div class="login-card">
+      <div class="d-flex flex-column justify-content-center gap-medium">
+        <div class="text-center">
+          <img class="logo-sistema"
+               width="auto"
+               height="80%"
+               src="{% if logo %}{{ logo.imagem.url }}{% else %}{% static 'core/images/logo.png' %}{% endif %}"
+               alt="{{ system_name }}"/>
+        </div>
+        <div>
+          <p class="text-center fw-bold">{{ system_name }}</p>
+        </div>
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger text-wrap" role="alert">
+            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+          </div>
+        {% endif %}
+        <form method="post" class="d-flex flex-column gap-medium">
+          {% csrf_token %}
+          <div class="form-floating">
+            <input name="{{ form.username.html_name }}"
+                   placeholder="Usuário"
+                   id="{{ form.username.id_for_label }}"
+                   value="{% if form.username.value is not None %}{{ form.username.value }}{% endif %}"
+                   required
+                   type="text"
+                   class="form-control"/>
+            <label for="{{ form.username.id_for_label }}">Usuário</label>
+            {% if form.username.errors %}{{ form.username.errors }}{% endif %}
+            {% if form.username.help_text %}
+              <small class="form-text text-muted">{{ form.username.help_text|safe }}</small>
+            {% endif %}
+            {% if form.username.field.required %}
+              <div class="invalid-feedback">{{ form.username.field.error_messages.required }}</div>
+            {% endif %}
+          </div>
+          <div class="form-floating">
+            <input name="{{ form.password.html_name }}"
+                   id="{{ form.password.id_for_label }}"
+                   required
+                   type="password"
+                   class="form-control"
+                   placeholder="Senha"/>
+            <label for="{{ form.password.id_for_label }}">Senha</label>
+            {% if form.password.errors %}{{ form.password.errors }}{% endif %}
+            {% if form.password.help_text %}
+              <small class="form-text text-muted">{{ form.password.help_text|safe }}</small>
+            {% endif %}
+          </div>
+          <div>
+            <a href="#" class="link-primary">Esqueci a senha</a>
+          </div>
+          {% if form.password.field.required %}
+            <div class="invalid-feedback">{{ form.password.field.error_messages.required }}</div>
+          {% endif %}
+          <div class="br-checkbox">
+            <input type="checkbox" id="lembrar"/>
+            <label for="lembrar">Lembrar-me</label>
+          </div>
+          <div>
+            <button type="submit" class="br-button block primary">Acessar</button>
+          </div>
+        </div>
+      </form>
+      <div class="text-center mt-5">
+        <div class="d-flex justify-content-center gap-large">
+          <div>
+            <img src="{% static 'core/images/logo_agtec.svg' %}"
+                 width="150px;"
+                 height="100%;"
+                 alt="Agência de Tecnologia de Palmas"/>
+          </div>
+          <div>
+            <img src="{% static 'core/images/brasao_palmas.svg' %}"
+                 width="100%;"
+                 height="60px;"
+                 alt="Prefeitura de Palmas"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

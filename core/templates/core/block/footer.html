@@ -1,0 +1,69 @@
+{% load base %}
+{% load static %}
+<footer class="br-footer pt-4">
+    <div class="container d-flex flex-sm-row flex-column gap-large align-items-center justify-content-center">
+        <div class="w-100 text-center">
+            <img height="70"
+                 width="auto"
+                 src="{% static 'core/images/brasao_palmas.svg' %}"
+                 alt="Prefeitura Municipal de Palmas"
+                 title="Prefeitura Municipal de Palmas"/>
+        </div>
+        <div class="w-100 text-center">
+            <img height="70"
+                 width="auto"
+                 src="{% static 'core/images/logo_palmas.svg' %}"
+                 alt="Prefeitura Municipal de Palmas"
+                 title="Prefeitura Municipal de Palmas"/>
+        </div>
+        <div class="w-100 text-center">
+            <div class="row">
+                <div class="col-3 col-sm-6 col-md-3">
+                    <a href="{{ social_media.facebook }}"
+                       target="_blank"
+                       class="br-button"
+                       title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+                <div class="col-3 col-sm-6 col-md-3">
+                    <a href="{{ social_media.instagram }}"
+                       target="_blank"
+                       class="br-button"
+                       title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="col-3 col-sm-6 col-md-3">
+                    <a href="{{ social_media.twitter }}"
+                       target="_blank"
+                       class="br-button"
+                       title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+                <div class="col-3 col-sm-6 col-md-3">
+                    <a href="{{ social_media.youtube }}"
+                       target="_blank"
+                       class="br-button"
+                       title="Canal do Youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="br-divider my-4"></span>
+    <div class="container-lg pb-1 text-center">
+        <div class="pb-3">
+            <img width="150"
+                 height="auto"
+                 class="mr-3 white"
+                 src="{% static 'core/images/logo_agtec.svg' %}"
+                 alt="© Agência de Tecnologia da Informação de Palmas"
+                 title="© Agência de Tecnologia da Informação de Palmas"/>
+        </div>
+        <p class="small m-0">© {% now "Y" %} Prefeitura Municipal de Palmas</p>
+        <p class="small">Todos os direitos reservados</p>
+    </div>
+</footer>

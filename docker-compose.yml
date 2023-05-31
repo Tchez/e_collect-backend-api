@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  database:
+    image: postgres:13.4-alpine
+    restart: always
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_DB=e_collect_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    image: e_collect
+    environment:
+      - DB_NAME=e_collect_db
+      - DB_PASSWORD=postgres
+      - DB_USER=postgres
+      - DB_HOST=database
+      - DB_PORT=5432
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - database

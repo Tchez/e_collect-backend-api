@@ -1,0 +1,73 @@
+{% load static %}
+{% load base %}
+{% if request.header_completo %}
+    <header class="br-header">
+        <div class="container-lg ">
+            <div class="header-top">
+                <div class="header-logo">
+                    <img src="{% static 'core/images/brasao_palmas.svg' %}" alt="logo"/>
+                    <span class="br-divider vertical mx-half mx-sm-1"></span>
+                    <div class="header-sign">{{ system_name }}</div>
+                </div>
+                {% if request.header_actions %}
+                    <div class="header-actions">
+                        <div class="header-login">
+                            <div class="header-avatar">
+                                <div class="avatar dropdown">
+                                    <span class="br-avatar" title="Fulana da Silva"><span class="image">
+                                        <img src="https://img2.gratispng.com/20180523/tha/kisspng-businessperson-computer-icons-avatar-clip-art-lattice-5b0508dc6a3a10.0013931115270566044351.jpg"
+                                             alt="Avatar"/>
+                                    </span></span>
+                                    <button class="br-button circle small ml-2"
+                                            type="button"
+                                            aria-label="Abrir Menu de usuário"
+                                            data-toggle="dropdown">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="br-notification rounder-md mt-2"
+                                         style="min-width: 13rem;
+                                                max-width: 10rem">
+                                        <div class="br-menu push active">
+                                            <div class="menu-container position-static">
+                                                <div class="menu-panel h-auto position-static shadow-lg-right">
+                                                    <nav class="menu-body">
+                                                        <a class="menu-item" href="{% url 'core:profile' %}">
+                                                            <span class="icon"><i class="fas fa-user" aria-hidden="true"></i></span>
+                                                            <span class="content">Perfil</span>
+                                                        </a>
+                                                        {% comment %} <a class="menu-item" href="{% url 'core:settings' %}">
+                              <span class="icon"><i class="fas fa-cog" aria-hidden="true"></i></span>
+                              <span class="content">Configurações</span>
+                                                        </a> {% endcomment %}
+                                                        <a class="menu-item" href="{% url 'core:logout' %}">
+                                                            <span class="icon"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></span>
+                                                            <span class="content">Sair</span>
+                                                        </a>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            {% if request.header_vertical %}
+                <div class="header-bottom">
+                    <div class="header-menu">
+                        <div class="header-menu-trigger">
+                            {% include './vertical_menu.html' %}
+                            <button class="d-none" data-target="#main-navigation" id="navigation"></button>
+                        </div>
+                        <div class="header-info">
+                            <div class="header-title">{% set_attribute_display_username %}</div>
+                            <div class="header-subtitle">{% get_ip %}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+{% endif %}
